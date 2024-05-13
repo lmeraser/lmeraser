@@ -11,12 +11,14 @@ ROOT_DIR = BASE_DIR
 sys.path.append(os.path.join(ROOT_DIR, '../'))
 
 from utils import logging
-from models.model_zoo import ViT_B_21K, Swin_B_22K
+from models.model_zoo import ViT_B_21K, Swin_B_22K, Swin_B_1K, ViT_B_1K
 
 logger = logging.get_logger("lmeraser")
 _MODEL_TYPES = {
     "vit-b-22k": ViT_B_21K, 
     "swin-b-22k": Swin_B_22K, 
+    "swin-b-1k": Swin_B_1K,
+    "vit-b-1k": ViT_B_1K,
 }
 
 

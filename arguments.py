@@ -5,7 +5,9 @@ import argparse
 
 MODEL_LIST = [
     "vit-b-22k", 
+    "vit-b-1k", 
     "swin-b-22k", 
+    "swin-b-1k", 
 ]
 
 ERASE_DATASETS = [

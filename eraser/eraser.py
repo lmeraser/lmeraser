@@ -3,7 +3,7 @@
  # Created Date: Dec 16th 2023
  # Author: Anonymous
  # -----
- # Last Modified: Saturday, 20th January 2024 1:02:18 am
+ # Last Modified: Saturday, 11th May 2024 9:41:05 am
  # -----
  # HISTORY:
  # Date      		By   	Comments
@@ -212,8 +212,10 @@ class Eraser(object):
 
         train_loader, _, _ = data_loader
         threshold_dict = {
-            "vit-b-22k": self.args.distance_threshold,
-            "swin-b-22k": 20,
+            "vit-b-22k": 10,
+            "vit-b-1k": 10,
+            "swin-b-22k": 10, 
+            "swin-b-1k": 10, 
         }
         hc = cluster.AgglomerativeClustering(
             n_clusters=None,

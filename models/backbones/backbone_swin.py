@@ -41,6 +41,9 @@ def _cfg(url='', **kwargs):
 
 
 default_cfgs = {
+    'swin_base_patch4_window7_224': _cfg(
+        url='https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_base_patch4_window7_224_22kto1k.pth',
+    ),
     'swin_base_patch4_window7_224_in22k': _cfg(
         url='https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_base_patch4_window7_224_22k.pth',
         num_classes=21841),
@@ -545,6 +548,15 @@ def _create_swin_transformer(variant, pretrained=False, default_cfg=None, **kwar
         pretrained_filter_fn=checkpoint_filter_fn,
         **kwargs
     )
+
+@register_model
+def jx_swin_base_patch4_window7_224(pretrained=False, **kwargs):
+    """ Swin-B @ 224x224, pretrained ImageNet-22k, fine tune 1k
+    """
+    model_kwargs = dict(
+        patch_size=4, window_size=7, embed_dim=128, depths=(2, 2, 18, 2), num_heads=(4, 8, 16, 32), **kwargs)
+    return _create_swin_transformer('swin_base_patch4_window7_224', pretrained=pretrained, **model_kwargs)
+
 
 @register_model
 def jx_swin_base_patch4_window7_224_in22k(pretrained=False, **kwargs):

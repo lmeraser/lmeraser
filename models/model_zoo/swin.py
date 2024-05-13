@@ -21,10 +21,20 @@ def Swin_B_22K(args):
     )
     return _load_checkpoint(args, model)
 
+def Swin_B_1K(args):
+    """Construct swin_base_patch4_window7_224 pretrained on ImageNet-21K, finetuned on ImageNet-1K."""
+    model = create_model(
+        'jx_swin_base_patch4_window7_224',
+        pretrained=False,
+        num_classes=1000,
+    )
+    return _load_checkpoint(args, model)
 
 def _load_checkpoint(args, model):
     """Load the checkpoint into the given model."""
-    if args.pretrained_model == "swin-b-22k":
+    if args.pretrained_model == "swin-b-1k":
+        path = os.path.join(ROOT_DIR, "../checkpoints/swin_base_patch4_window7_224.pth")
+    elif args.pretrained_model == "swin-b-22k":
         path = os.path.join(ROOT_DIR, "../checkpoints/swin_base_patch4_window7_224_22k.pth")
     else:
         raise NotImplementedError
