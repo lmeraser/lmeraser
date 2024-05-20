@@ -3,7 +3,7 @@
  # Created Date: Dec 16th 2023
  # Author: Anonymous
  # -----
- # Last Modified: Saturday, 11th May 2024 9:41:05 am
+ # Last Modified: Monday, 20th May 2024 4:26:54 pm
  # -----
  # HISTORY:
  # Date      		By   	Comments
@@ -101,6 +101,9 @@ class Eraser(object):
         super(Eraser, self).__init__()
         self.args = args
         self.model = model.eval()
+
+        for param in self.model.parameters():
+            param.requires_grad = False
 
         self.logger = logging.get_logger("lmeraser")
 
@@ -217,10 +220,16 @@ class Eraser(object):
             "swin-b-22k": 10, 
             "swin-b-1k": 10, 
         }
+        n_cluster_dict = {
+            "cifar10": 194,
+            "cifar100": 347,
+            "svhn": 30,
+            "gtsrb": 90,
+        }
         hc = cluster.AgglomerativeClustering(
-            n_clusters=None,
+            n_clusters=n_cluster_dict[self.args.test_dataset],
             linkage='average',
-            distance_threshold=threshold_dict[self.args.pretrained_model]
+            distance_threshold=None,
         )
         rep_gather = None  # Initialize rep_gather
         with torch.no_grad():
@@ -511,6 +520,8 @@ class Eraser(object):
         self.head_list = [head.to(self.devicename) for head in self.head_list]
         for head in self.head_list:
             head.train()
+            for param in head.parameters():
+                param.requires_grad = True
 
     def train_rand(self, train_loader, prompter, prompter_gather, step, optimizer, scheduler, epoch, batch):
         global_step = len(train_loader) * epoch + step

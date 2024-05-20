@@ -39,7 +39,8 @@ def main():
     model, cur_device = model_builder._construct_model(args)
 
     # logger infor rank and world size
-    logger.info(f"Rank: {torch.distributed.get_rank()}, World Size: {torch.distributed.get_world_size()}")
+    if args.distributed:
+        logger.info(f"Rank: {torch.distributed.get_rank()}, World Size: {torch.distributed.get_world_size()}")
 
     # initialize meta-learner
     eraser = Eraser(args, model)
@@ -61,7 +62,7 @@ def main():
 
 
 if __name__ == '__main__':
-    local_rank = int(os.environ.get('LOCAL_RANK', None))
+    local_rank = int(os.environ.get('LOCAL_RANK', '0'))
     world_size = int(os.environ.get('WORLD_SIZE', '1'))
     
     # parse arguments
