@@ -170,7 +170,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Meta Training for Visual Prompts')
     parser.add_argument('--dataset', type=str, default="svhn")
-    parser.add_argument('--data_dir', type=str, default="/data-x/g12/huangqidong/")
+    parser.add_argument('--data_dir', type=str, default="../")
     parser.add_argument('--pretrained_model', type=str, default="vit-b-22k")
     parser.add_argument('--crop_size', type=int, default=224)
     parser.add_argument('--num_classes', type=int, default=10)

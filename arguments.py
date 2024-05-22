@@ -36,7 +36,7 @@ class Arguments:
 
         ### data related
         self.add_argument('--batch_size', type=int, default=128, help='Batch size in training')
-        self.add_argument('--base_dir', type=str, default='/data-x/g12/huangqidong/')
+        self.add_argument('--base_dir', type=str, default='../')
         self.add_argument('--crop_size', default=224, type=int, help='Input size of images [default: 224].')
         self.add_argument('--diversities', type=dict, default=DATASET_DIVERSITIES, help='Diversity values of datasets.')
 
