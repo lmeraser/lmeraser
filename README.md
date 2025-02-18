@@ -1,9 +1,5 @@
 # LMEraser: Large Model Unlearning through Adaptive Prompt Tuning
 
-## Aditional result for skin cancer
-
-![skin-cancer-result](skin-canser-result.jpg)
-
 ## Environment Setup
 
 This code has been tested with Python 3.11.5 and PyTorch 2.1.2 with CUDA 12.1 on Ubuntu 22.04. The required packages are listed in `environment.yaml`.
